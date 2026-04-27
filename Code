@@ -1,0 +1,48 @@
+# Bracket Validator - Full Python Code
+
+class BracketValidator:
+    def __init__(self):
+        self.pairs = {
+            ')': '(',
+            '}': '{',
+            ']': '['
+        }
+
+    def is_valid(self, text):
+        stack = []
+
+        for char in text:
+            # Opening brackets
+            if char in "({[":
+                stack.append(char)
+
+            # Closing brackets
+            elif char in ")}]":
+                if not stack:
+                    return False
+                top = stack.pop()
+
+                if top != self.pairs[char]:
+                    return False
+
+        return len(stack) == 0
+
+
+# Main Program
+def main():
+    validator = BracketValidator()
+
+    print("=== Bracket Validator ===")
+    print("Checks if brackets are balanced.\n")
+
+    user_input = input("Enter expression: ")
+
+    if validator.is_valid(user_input):
+        print("Valid Bracket Sequence")
+    else:
+        print("Invalid Bracket Sequence")
+
+
+# Run Program
+if __name__ == "__main__":
+    main()
